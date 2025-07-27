@@ -15,6 +15,10 @@ A simple Telegram bot that connects your Telegram account to a powerful AI model
 - A Telegram Bot Token (from [@BotFather](https://t.me/BotFather))
 - A Groq API key (from [console.groq.com](https://console.groq.com/))
 - `requests` Python package
+      python -m pip install requests
+
+## 🤖 see other model list in groq
+  https://console.groq.com/docs/models
 
 ## 🔧 Installation
 
