@@ -102,5 +102,4 @@ Use .env or a secure secrets manager if you're deploying this in production.
 🏷️ License
 MIT License
 
-📢 Hashtags (for social sharing)
-#TelegramBot #Python #AI #Groq #LLaMA #Gemma #OpenSource #Chatbot #LLM #NLP
+📢#TelegramBot #Python #AI #Groq #LLaMA #Gemma #OpenSource #Chatbot #LLM #NLP
