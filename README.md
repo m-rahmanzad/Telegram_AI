@@ -27,74 +27,66 @@ A simple Telegram bot that connects your Telegram account to a powerful AI model
 🧠 Supported Models on Groq
 You can view all available models and their identifiers here:
 🔗 Groq Model List
-
 Example model names:
-
-meta-llama/llama-3-8b-instruct
-
-meta-llama/llama-3-70b-instruct
-
-google/gemma-7b-it
-
-gemini
+* meta-llama/llama-3-8b-instruct
+* meta-llama/llama-3-70b-instruct
+* google/gemma-7b-it
+* gemini
 
 🔧 Installation & Setup
 Clone this repo:
 
-bash
-Copy
-Edit
+```bash
 git clone https://github.com/yourusername/groq-telegram-bot.git
 cd groq-telegram-bot
+```
+
+
+
 Create a .env file or set your secrets manually:
 
 Open the Python file and replace the following placeholders:
 
+
 TELEGRAM_BOT_TOKEN = "your-telegram-bot-token"
-
 GROQ_API_KEY = "your-groq-api-key"
-
 MODEL = "your-desired-model" (e.g., meta-llama/llama-3-70b-instruct)
 
 Run the bot:
-
-bash
-Copy
-Edit
+```bash
 python groq_telegram_bot.py
+```
+
 💡 Optional: Use with Proxy on Windows PowerShell
 If you're behind a proxy (e.g., using Clash or V2Ray), and want to run the bot via proxy:
 
 Open PowerShell and allow script execution (first time only):
-
+```bash
 powershell
-Copy
-Edit
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
-Run the helper script:
+```
 
+Run the helper script:
+```bash
 powershell
-Copy
-Edit
 .\run_via_proxy.ps1
+```
 This sets the environment proxy and runs the bot automatically.
+
 
 📸 Example
 Send a message to your Telegram bot like:
-
 What is the difference between GPT and LLaMA?
-
 And get a smart, AI-generated response powered by Groq!
 
 📁 File Structure
-bash
-Copy
-Edit
+```bash
 groq-telegram-bot/
 │
 ├── groq_telegram_bot.py       # Main bot logic
 ├── run_via_proxy.ps1          # Windows script to run behind proxy
 └── README.md                  # Project info
+```
 
 
 🔐 Security Notice
@@ -103,14 +95,9 @@ Use .env or a secure secrets manager if you're deploying this in production.
 
 🧠 Future Ideas
  Support conversation history (chat memory)
-
  Add logging and admin commands
-
  Multi-user rate limiting
 
-📬 Contact
-Made with ❤️ by Mostafa
-Feel free to fork, use, and contribute.
 
 🏷️ License
 MIT License
