@@ -17,7 +17,7 @@ last_update_id = 0
 print("🤖 Bot is running...")
 while True:
     try:
-        # new messages
+         # new messages
         response = requests.get(f'{TELEGRAM_API}/getUpdates?offset={last_update_id + 1}')
         data = response.json()
 
@@ -25,13 +25,18 @@ while True:
             if 'message' not in update:
                 continue
 
-            chat_id = update['message']['chat']['id']
-            user_text = update['message'].get('text', '')
+            message = update['message']
+            user_info = message.get("from", {})
+            username = user_info.get("username") or f'{user_info.get("first_name", "")} {user_info.get("last_name", "")}'.strip()
+            chat_id = message['chat']['id']
+            user_text = message.get('text', '')
             last_update_id = update['update_id']
 
-            print(f'📨 Message from {chat_id}: {user_text}')
+            # get time
+            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            print(f'[{timestamp}] 📨 Message from {chat_id} ({username}): {user_text}')
 
-            # skipe if message is null
+             # skipe if message is null
             if not user_text.strip():
                 continue
 
