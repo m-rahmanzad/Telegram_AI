@@ -16,10 +16,11 @@ last_update_id = 0
 
 # ==== main loop ====
 print("🤖 Bot is running...")
+
 while True:
     try:
-         # new messages
-        response = requests.get(f'{TELEGRAM_API}/getUpdates?offset={last_update_id + 1}')
+        # Try to get new updates from Telegram
+        response = requests.get(f'{TELEGRAM_API}/getUpdates?offset={last_update_id + 1}', timeout=10)
         data = response.json()
 
         for update in data['result']:
@@ -33,15 +34,14 @@ while True:
             user_text = message.get('text', '')
             last_update_id = update['update_id']
 
-            # get time
+            # Print message with timestamp
             timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             print(f'[{timestamp}] 📨 Message from {chat_id} ({username}): {user_text}')
 
-             # skipe if message is null
             if not user_text.strip():
                 continue
 
-            # request ro groq
+            # Send user input to GROQ
             groq_response = requests.post(
                 GROQ_API_URL,
                 headers={
@@ -51,19 +51,26 @@ while True:
                 json={
                     "model": GROQ_MODEL,
                     "messages": [{"role": "user", "content": user_text}]
-                }
+                },
+                timeout=15
             )
 
             result = groq_response.json()
             reply = result['choices'][0]['message']['content']
 
-            # send message to telegram
+            # Send reply to Telegram
             requests.post(f'{TELEGRAM_API}/sendMessage', data={
                 'chat_id': chat_id,
                 'text': reply
-            })
+            }, timeout=10)
+
+    except requests.exceptions.RequestException as net_err:
+        print("🌐 Network error:", net_err)
+        print("⏳ Waiting 10 seconds before retrying...")
+        time.sleep(10)
 
     except Exception as e:
-        print("⚠️ Error:", e)
+        print("⚠️ General error:", e)
+        time.sleep(2)  # Shorter delay for other errors
 
-    time.sleep(1)
+    time.sleep(1)  # Normal loop delay
